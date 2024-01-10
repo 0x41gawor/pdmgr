@@ -61,7 +61,7 @@ First, familiarize yourself with [Objects in Kubernetes](https://kubernetes.io/d
 Next, learn about defining your own custom kinds of Objects using the [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) mechanism. This step requires more time and possibly some hands-on practice. Try defining some Custom Resource Definitions (CRDs) and experiment with them. Here are some valuable resources:
 
 - [Kubernetes crds what they are and why they are useful](https://thenewstack.io/kubernetes-crds-what-they-are-and-why-they-are-useful/)
-- //TODO my own tutorial on custom resource definitions hehe 
+- [Tutorial in this repo](crd-playground-lab.md)
 
 Finally, it's a good time to delve into the [Operator Pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/).
 
