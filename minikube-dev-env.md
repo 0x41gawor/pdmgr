@@ -8,7 +8,7 @@ K8s operator can be developed with Ansible, Helm or Go. Only Go gives the access
 
 ## Architecture
 
-Architecture choices are influenced by my personal set of favorite tools. As a Host OS for Minikube I've chosen the Ubuntu Server. As a host of Ubuntu Server the VritualBox Machine is applied. I am using Visual Studio Code and MobaXterm SSH clients to connect to the Ubuntu-Server Virtual Machine. 
+Architecture choices are influenced by my personal set of favorite tools. As a Host OS for Minikube I've chosen the Ubuntu Server. As a host of Ubuntu Server the Virtual Box Machine is applied. I am using Visual Studio Code and MobaXterm SSH clients to connect to the Ubuntu-Server Virtual Machine. 
 
 ![](img/1.png)
 
@@ -50,7 +50,7 @@ It is a good practice to setup a hostname of a machine and to set a static IP ad
 
 **4. Install Minikube dependecies**
 
-As it was said before Minkube needs to Docker to be hosted as a container. Of course there are some other option as Podman, Hyperkit etc. but Docker was the chosen. 
+As it was said before Minikube needs to Docker to be hosted as a container. Of course there are some other option as Podman, Hyperkit etc. but Docker was the chosen. 
 
 We will also install Kubectl as a program separate to Minikube. Minikube comes with built-in Kubectl but usage of it is inconvenient. 
 
