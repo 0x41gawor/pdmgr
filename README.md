@@ -1,4 +1,8 @@
-# ENI Closed Control Loops, k8s operators and CRDs
+<h1 align="center">ENI Closed Control Loops, k8s operators and CRDs</h1>
+
+<p align="center">
+  <img src="img/logo.webp" width="150" height="150" />
+</p>
 
 The repository contains various documents related to the master's thesis. 
 
