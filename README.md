@@ -14,7 +14,7 @@ This README serves as a brief description of each file included.
 
 This is the starting point for anyone wishing to follow the steps I have taken. 
 
-The document outlines the learning path for Kubernetes development.t.
+The document outlines the learning path for Kubernetes Operators development.
 
 ## [minikube-dev-env](minikube-dev-env.md)
 
