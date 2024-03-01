@@ -84,7 +84,15 @@ OPERATOR WHITEPAPER ----> https://github.com/cncf/tag-app-delivery/blob/163962c4
 
 Technically, there is no difference between a typical controller and an operator. Often the difference referred to is the operational knowledge that is included in the operator.
 
+# 24 02 19
 
+Operator is a rather a deployment of controller pods than single controller pod. 
+
+Why do I conclude this?
+
+Section 4 here ----> https://cloud.google.com/blog/products/containers-kubernetes/best-practices-for-building-kubernetes-operators-and-stateful-apps
+
+Best Definition of Operator on the business level is here, first/intro section -> https://web.archive.org/web/20170129131616/https://coreos.com/blog/introducing-operators.html overall this page contains some good examples.
 
 
 
