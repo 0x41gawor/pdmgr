@@ -31,3 +31,6 @@ Simple lab to play with [Custom Resource Definitions](https://kubernetes.io/docs
 ## [notes](notes.md)
 
 Here are some notes that I found important. They might be useful to others as well.
+
+## [cloopdemo1](https://github.com/0x41gawor/cloopdemo1)
+Private repo.
