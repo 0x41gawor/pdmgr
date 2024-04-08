@@ -1,0 +1,1 @@
+Closedloop to jest przykład na którym pracował dr Bursztynowski wraz ze swoim kolegą w Orange R&D
