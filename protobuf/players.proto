@@ -1,0 +1,13 @@
+syntax = "proto3";
+package players;
+option go_package = "protos/";
+
+message FootballPlayer {
+   string name = 1;
+   string country = 2;
+}
+
+message Players {
+   repeated FootballPlayer list = 1;
+}
+

@@ -6,7 +6,7 @@
 
 The repository contains various documents related to the master's thesis. 
 
-The primary objective during the thesis work is to master the usage of k8s operators and CRDs. As such, this repository will primarily focus on these topics (as of now).
+The primary objective during the thesis work is to master the usage of k8s operators and CRDs, and based on this knowledge build a framework/platform to run any kind of closed control loop in a k8s cluster. As such, this repository will primarily focus on these topics (as of now). 
 
 This README serves as a brief description of each file included.
 
@@ -30,7 +30,17 @@ Simple lab to play with [Custom Resource Definitions](https://kubernetes.io/docs
 
 ## [notes](notes.md)
 
-Here are some notes that I found important. They might be useful to others as well.
+Here are some notes that I found important when learning operators. They might be useful to others as well.
 
 ## [cloopdemo1](https://github.com/0x41gawor/cloopdemo1)
 Private repo.
+
+## [protobuf](protobuf/)
+
+Research about Protocol Buffers.
+
+## [mmet](mmet/)
+
+My version of `cloopdemo`. 
+
+Name is the shortest version of "MME Network", as this will be the managed system for closed loops.

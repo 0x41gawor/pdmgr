@@ -58,7 +58,7 @@ For example some node loses half of its resources --> we need to rearrange. And 
 
 Or the change in distribution can be result of AI long term analysis.
 
-#### Summarizing
+### Summarizing
 
 We have two loops:
 - reactive one enforces the proper distribution on the network
