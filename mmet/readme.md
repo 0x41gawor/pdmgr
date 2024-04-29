@@ -7,3 +7,4 @@ Need to come up with some simple subject that can be monitored and adjusted by t
 
 The business case is presented in [business-case.md](business-case.md).
 
+When you'll get familiar with business case, go to [loops-description.md](loops-description.md)

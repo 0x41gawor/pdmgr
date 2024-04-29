@@ -2,38 +2,39 @@
 
 This document presents more technical (algorithms, data structures) description about loops used in mmet.
 
-Please get familiar with [business-case.md](business-case.md) first.
+Please review [business-case.md](business-case.md) before proceeding.
+
+Status: Doc is still under construction.
 
 ## Architecture 
-Before diving into explanation of algorithms used in loops let's talk about the components of our system.
+Let's first discuss the components of our system before delving into the algorithms used in the loops.
 
 We can distinguish 4 components:
-- `mmet` - MME Network. From closed control loop's perspective it stands as **managed system**.
-- `translation agent` - in general, bridge between loops and external world, in our case external world is mmet. It:
-  - pulls/listens for data from mmet
-  - pushes action commands to mmet
-  
-- `reactive loop` - this loop will ensure/enforce demanded traffic distribution. 
-- `deliberative loop` - this loop, while supervising the reactive one, can change distribution values. 
+- `mmet` - Represents the MME Network. From the perspective of the closed control loop, it acts as the **managed system**.
+- `translation agent` - Serves as a bridge between the loops and the external world; in our case, the external world is `mmet`. It:
+  - Retrieves data from `mmet`
+  - Sends action commands to `mmet`
+- `reactive loop` - This loop ensures and enforces the demanded traffic distribution.
+- `deliberative loop` - Supervising the reactive loop, this component can modify distribution values.
 
 
 
 Table below give some insights about technical implementation/placement of these components.
 
-| Component name:   | Implemented as:                                          | Belongs to our platform? |
-| ----------------- | -------------------------------------------------------- | ------------------------ |
-| mmet              | Linux process, probably a go application                 | No, external world       |
-| translation agent | Kubernetes pod, probably a go application in a container | Yes, entry point         |
-| reactive loop     | Custom Resource API Objects in Kubernetes                | Yes                      |
-| deliberative loop | Custom Resource API Objects in Kubernetes                | Yes                      |
+| Component name:   | Implemented as:                                        | Belongs to our platform? |
+| ----------------- | ------------------------------------------------------ | ------------------------ |
+| mmet              | Linux process, likely a Go application                 | No (external)            |
+| translation agent | Kubernetes pod, likely a Go application in a container | Yes (entry point)        |
+| reactive loop     | Custom Resource API Objects in Kubernetes              | Yes                      |
+| deliberative loop | Custom Resource API Objects in Kubernetes              | Yes                      |
 
 ## mmet
 
 ### General descr
 
-This linux process gives some quadruple each round. Each value in quadruple represents a number of session served at the moment (at this round) by corresponding MME node.
+This Linux process generates a quadruple each round, where each value represents the number of sessions currently served by the corresponding MME node.
 
-E.g. it will produce json as below:
+For example, it produces JSON as below:
 ```json
 {
   "Gdansk": 10,
@@ -43,9 +44,10 @@ E.g. it will produce json as below:
 }
 ```
 
-At each round a number (can be less than 0) that will be added to each node count is randomly chosen. 
+Each round, a random number (which can be negative) is added to each node's count. 
 
-It can result in such trait:
+This results in a trajectory like the following
+
 ```sh
 ```sh
 # roundNumber. Gdansk-Poznan-Warsaw-Cracow
@@ -56,9 +58,8 @@ It can result in such trait:
 5. 6-7-18-8
 ```
 
-Beside form generating values a program also can receive some input, that says "move `x` units of traffic from node `a` to node `b`".
+Additionally, the program can receive commands specifying traffic movement from one node to another ("move `x` units of traffic from node `a` to node `b`"), such as:
 
-E.g.
 ```json
 {
   "count": 2,
@@ -67,17 +68,34 @@ E.g.
 }
 ```
 
-By default let's assume that round happens each minute. 
+By default, rounds occur every minute.
 
-The values generated for each round are send via http to pre-configured endpoint in a json format presented above. 
-Each round start with Log:
+Data generated each round are sent via HTTP to a pre-configured endpoint in the JSON format shown above. Each round begins with a log statement:
+
 ```sh
 "Round 1: {Gdansk: 10, Poznan: 12, Warsaw: 18, Krakow: 6}"
 ```
 
-Additionally, program listens on http port 4545 (api/move) and when incoming message move comes it logs:
+Furthermore, the program listens on HTTP port 4545 (/api/move) and logs incoming move commands:
 ```sh
 "Got move command: {count: 2, from: Warsaw, to: Poznan}"
 ```
 
-The starting configuration of distribution values is hardcoded in some accessible place.
+The initial configuration of distribution values is hardcoded in an accessible location.
+
+### Implementation
+
+See [mmet.go](mmet.go).
+
+## Translation Agent
+
+### General descr
+
+Translation Agent is a linux process that:
+
+- Operates an HTTP server and listens to requests from `mmet`
+- Utilizes an HTTP client to send Move Commands to `mmet`
+- Utilizes the kube-api-server client to push data into the `reactive loop`
+
+It is containerized using Docker and deployed as a pod in a Kubernetes cluster (Minikube).
+
