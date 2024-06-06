@@ -20,7 +20,7 @@ The document outlines the learning path for Kubernetes Operators development.
 
 Setting up a development environment is a key part of the learning path. This document presents my approach to this task.
 
-## [Virtual Networking Directory](Virtual Networking/Virtual Networking.md)
+## [Virtual Networking Directory](virtual-box-networking/)
 
 This contains a tutorial on the network adapter modes available in Oracle VM VirtualBox. These modes are mentioned elsewhere in this repository, hence the inclusion of this guide.
 
