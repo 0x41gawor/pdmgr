@@ -23,24 +23,24 @@ At this stage, I recommend engaging with extensive courses on platforms like Ude
 
 **Core Kubernetes Concepts**
 
-1. - [ ] **Pods**: Understand what a pod is, how it works, and its lifecycle. 
-2. - [ ] **Deployments and ReplicaSets**: Know how to manage a set of replicas of a pod for availability and scalability
-3. - [ ] **Services**: Understand how services provide a stable interface to pods.
-4. - [ ] **Namespaces**: Know how namespaces are used to organize resources within a cluster. 
-5. - [ ] **ConfigMaps and Secrets**: Understand how to manage application configuration and sensitive data. 
-6. - [ ] **StatefulSets**: Basic understanding, especially if you plan to manage stateful applications with Operators.:
+1. - [x] **Pods**: Understand what a pod is, how it works, and its lifecycle. 
+2. - [x] **Deployments and ReplicaSets**: Know how to manage a set of replicas of a pod for availability and scalability
+3. - [x] **Services**: Understand how services provide a stable interface to pods.
+4. - [x] **Namespaces**: Know how namespaces are used to organize resources within a cluster. 
+5. - [x] **ConfigMaps and Secrets**: Understand how to manage application configuration and sensitive data. 
+6. - [x] **StatefulSets**: Basic understanding, especially if you plan to manage stateful applications with Operators.:
 
 **Intermediate Concepts**
 
-1. - [ ] **Ingress**: Understand how Ingress controllers provide external access to services. 
-2. - [ ] **Volumes and Persistent Storage**: Basic understanding of how Kubernetes handles storage, especially if your Operator will manage stateful applications. 
-3. - [ ] **Resource Limits and Requests**: Know how to allocate resources to containers. 
+1. - [x] **Ingress**: Understand how Ingress controllers provide external access to services. 
+2. - [x] **Volumes and Persistent Storage**: Basic understanding of how Kubernetes handles storage, especially if your Operator will manage stateful applications. 
+3. - [x] **Resource Limits and Requests**: Know how to allocate resources to containers. 
 
 **Advanced Concepts (Helpful but not required initially)**
 
-1. - [ ] **Security**: Basic understanding of Kubernetes security practices, such as Role-Based Access Control (RBAC), Network Policies, and Pod Security Policies. 
-2. - [ ] **Networking**: Understand how pod networking works, including concepts like CNI (Container Network Interface). 
-3. - [ ] **Monitoring and Logging**: Familiarity with monitoring and logging practices in Kubernetes. 
+1. - [x] **Security**: Basic understanding of Kubernetes security practices, such as Role-Based Access Control (RBAC), Network Policies, and Pod Security Policies. 
+2. - [x] **Networking**: Understand how pod networking works, including concepts like CNI (Container Network Interface). 
+3. - [x] **Monitoring and Logging**: Familiarity with monitoring and logging practices in Kubernetes. 
 
 ## 2. Learn the Concept of Operator
 

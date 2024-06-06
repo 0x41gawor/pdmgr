@@ -9,7 +9,7 @@
 - Co należy jeszcze zrobić
 
 ## Geneza
-W 2022 rozpocząłem praktyki na stanowisku Inżyniera w Biurze Strategicznego Planowania i Standaryzacji Sieci. Jednym z zadań jakie wtedy dostałem było rozpoznanie kierunku rozwoju sieci mobilnych w kontekście 6G. Dla operatora ze strategicznego punktu widzenia takie zadanie ma sens, oraz wyniesiona wiedza może w jakiś sposób wpływać na długofalowe decyzje. 
+W 2022 odbywałem praktyki na stanowisku Inżyniera w Biurze Strategicznego Planowania i Standaryzacji Sieci. Jednym z zadań jakie wtedy dostałem było rozpoznanie kierunku rozwoju sieci mobilnych w kontekście 6G. Dla operatora ze strategicznego punktu widzenia takie zadanie ma sens, oraz wyniesiona wiedza może w jakiś sposób wpływać na długofalowe decyzje. 
 
 Zapoznałem się wtedy z 4-oma whitepaper'ami. Od firm: Nokia, Huawei, Mediatek i Ericsson.
 
@@ -35,7 +35,7 @@ Tak, aby na ich podstawie wypracować architekturę systemu odpowiadającego na 
 
 ## Problem
 
-Każde inżynierskie zadanie wykonane w historia ludzkości można przedstawić w modelu problem-rozwiązanie. Zacznijmy do zdefiniowania problemu, który praca magisterska chce rozwiązać. Otóż ENI definiuje jedynie (jak to standard architekturę), jest ona wysokokopoziomowa i abstrakcyjna. Musi być ogólna, aby znalzała zastosowanie. Standardy zazwyczaj nie mówią nic o implementacji, one tylko specyfikują zachowanie oraz interfejsy. Jakie jest następny krok? Co jest problemem? Przybliżenie tej abstrakcji na implementację.
+Każde inżynierskie zadanie wykonane w historia ludzkości można przedstawić w modelu problem-rozwiązanie. Zacznijmy do zdefiniowania problemu, który praca magisterska chce rozwiązać. Otóż ENI definiuje jedynie (jak to standard architekturę), jest ona wysokokopoziomowa i abstrakcyjna. Musi być ogólna, aby znalzała zastosowanie. Standardy zazwyczaj nie mówią nic o implementacji, one tylko specyfikują zachowanie oraz interfejsy. Jakie jest następny krok? Co jest problemem? **Przybliżenie tej abstrakcji na implementację.**
 
 Spójrzmy na architekturę ENI. Jak teraz zaimplementować bloczek "ENI System"?
 
@@ -52,7 +52,7 @@ Te wszystkie ciężkie terminy są zdefiniowane w standardach ENI. My jedynie mu
 
 ## Rozwiązanie
 
-Impementacja programistyczna aplikacji będącej pętlą sterowania nie jest w żaden sposób ogólna, jako że jej logika oraz polisy zakodowane by zostały w kodzie aplikacji. Takie rozwiązanie odpada na starcie i służy jedynie jako obrazowy punkt wyjścia. 
+Implementacja programistyczna aplikacji będącej pętlą sterowania nie jest w żaden sposób ogólna, jako że jej logika oraz polisy zakodowane by zostały w kodzie aplikacji. Takie rozwiązanie odpada na starcie i służy jedynie jako obrazowy punkt wyjścia. 
 
 Należy więc zaprogramować platformę, która jest ogólna. W kodzie zakodowane są jedynie ogólne wzorce logiki pętli oraz interpter polis. Platforma ta pozwalałaby na zdefiniowanie w niej i wykonanie dowolnej z pętli sterowania oraz na przekazanie jej dowolnych polis/polityk. Dodatkowo posiadała by jasno zdefiniowane interfejsy, tak aby można było podłączyć do niej moduły AI, które realizowałyby: świadomość kontekstu, zarządzanie wiedzą, procesowanie kognitywne itp. Również musi ona pozwalać na zdefiniowanie modelu na jakim pracujemy. Dodatkowo wszystkie interfejsy i standardy z jakich by korzystała muszą dobrze znane szeroko pojętej społeczności, która by z niej korzystała. 
 
@@ -108,7 +108,7 @@ Wymagania na platformę/framework:
 
 - Zamknięcie fazy developmentu (Implementacja kodu operatorów), a w tym:
   - Wbudowanie odwołań do OPA w operatorze
-  - Oóglne wbudowanie odwołań do komponentów zewnętrznych w operatorze
+  - Ogólne wbudowanie odwołań do komponentów zewnętrznych w operatorze
   - Wymyślenie dobrej konwencji nazewnictwa, tak aby z nazwy można było łatwo/automatycznie wywieść nazwy Custom Resouce, Operatorów, URL w OPA itp.
   - Zdefiniowanie granic. Co jest zakresem kodu operatora a co polityką w OPA
 - Próba dojścia do generycznych operatorów, tak aby jedynie plikami CR, politykami OPA oraz komponentami zewnętrznymi definiować logikę pętli. Dojście do stanu "data-driven".
