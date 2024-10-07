@@ -2,10 +2,12 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"log"
 	"math/rand"
 	"net/http"
+	"sort"
 	"strings"
 	"sync"
 	"time"
@@ -21,14 +23,19 @@ func (ns *NodeSessions) String() string {
 	ns.mu.Lock()
 	defer ns.mu.Unlock()
 
+	// Collect cities into a slice
 	cities := make([]string, 0, len(ns.Counts))
 	for city := range ns.Counts {
 		cities = append(cities, city)
 	}
 
+	// Sort the cities alphabetically
+	sort.Strings(cities)
+
+	// Create parts of the final string
 	parts := make([]string, 0, len(cities))
 	for _, city := range cities {
-		parts = append(parts, fmt.Sprintf("%s: %d", city, ns.Counts[city]))
+		parts = append(parts, fmt.Sprintf("%s: %2d", city, ns.Counts[city]))
 	}
 
 	return "{" + strings.Join(parts, ", ") + "}"
@@ -39,6 +46,10 @@ type MoveCommand struct {
 	Count int    `json:"count"`
 	From  string `json:"from"`
 	To    string `json:"to"`
+}
+
+func (mc *MoveCommand) String() string {
+	return "{From: " + mc.From + ", To: " + mc.To + ", Count: " + fmt.Sprintf("%d", mc.Count) + "}"
 }
 
 func (ns *NodeSessions) ApplyRandomChange() {
@@ -62,20 +73,28 @@ func (ns *NodeSessions) MoveHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ns.mu.Lock()
-	defer ns.mu.Unlock()
-
 	// Apply the move command if valid
 	if _, ok := ns.Counts[cmd.From]; ok && ns.Counts[cmd.From] >= cmd.Count {
+		ns.mu.Lock()
 		ns.Counts[cmd.From] -= cmd.Count
 		ns.Counts[cmd.To] += cmd.Count
-		log.Printf("Got move command: %+v", cmd)
+		ns.mu.Unlock()
+		log.Printf("Got move command: %+v", cmd.String())
+		// log.Printf("Round %d:", round)
+		log.Printf("Round %d: %+v", round, ns.String())
 	} else {
 		http.Error(w, "Invalid move command", http.StatusBadRequest)
 	}
 }
 
+var round = 0
+
 func main() {
+	// Command-line flag to get the interval value
+	interval := flag.Int("interval", 5, "Interval in seconds for applying random changes")
+	flag.Parse()
+	log.Printf("Round interval time set as: %d seconds", *interval)
+
 	time.Now().UnixNano()
 
 	sessions := NodeSessions{
@@ -85,18 +104,17 @@ func main() {
 	// HTTP Server for move commands
 	http.HandleFunc("/api/move", sessions.MoveHandler)
 	go func() {
-		if err := http.ListenAndServe(":4545", nil); err != nil {
+		if err := http.ListenAndServe(":4040", nil); err != nil {
 			log.Fatalf("Failed to start server: %v", err)
 		}
 	}()
 
 	// Main loop
-	ticker := time.NewTicker(1 * time.Second * 5)
-	round := 1
+	ticker := time.NewTicker(1 * time.Second * time.Duration(*interval))
 	for ; true; <-ticker.C {
 		sessions.ApplyRandomChange()
 		// Here, you'd also send the JSON to the configured endpoint using an HTTP client.
-		log.Printf("Round %d: %+v", round, sessions.String())
 		round++
+		log.Printf("%-10s %s", fmt.Sprintf("Round %d:", round), sessions.String())
 	}
 }
